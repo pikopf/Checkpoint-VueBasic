@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo Liste</title>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>ToDo's</h1>
+        </header>
+
+
+        <input type="text" id="input" placeholder="Neues Todo" v-model="newTodoText">
+
+        <button id="add" @click="addNewTodo" :disabled="activateAddButton">Add</button>
+        <br><br>
+        <select id="filterForSearch" v-model="filterMode">
+            <option value="1">Enthält :</option>
+            <option value="2">Beginnt mit :</option>
+        </select>
+        {{filterMode}}
+        <input type="text" placeholder="Suche" v-model="currentSearch">
+        <br>
+        {{currentSearch}}
+        <br>
+        <select id="filterForDone">
+            <option>Alle ToDo's anzeigen</option>
+            <option>Erledigte ToDo's anzeigen</option>
+            <option>Zu erledigende ToDo's anzeigen</option>
+        </select>
+
+        <p> <button id="deleteDoneTodos" @click="removeDoneTodos">Delete Done Todos</button> Du hast
+            {{todos.length}} unerledigte Todos. </p>
+
+
+        <h2>ToDo Liste:</h2>
+        <ul id="output">
+
+            <ul v-for="todo in searchFilter" key="todo.description">
+
+                <input type="checkbox" v-model="todo.done">
+
+                {{todo.description}}
+            </ul>
+        </ul>
+    </div>
+</body>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="script.js"></script>
+
+</html>
